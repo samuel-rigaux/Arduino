@@ -1,0 +1,8 @@
+⚡ Câblage LCD I2C :
+LCD I2C	Arduino UNO
+GND	GND
+VCC	5V
+SDA	A4
+SCL	A5
+
+📌 Sur un Arduino Mega : SDA = 20, SCL = 21

@@ -1,0 +1,33 @@
+#include <LiquidCrystal.h>
+
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+// Définition du smiley
+byte smiley[8] = {
+  0b00000,
+  0b01010,
+  0b00000,
+  0b00000,
+  0b10001,
+  0b01110,
+  0b00000,
+  0b00000
+};
+
+void setup() {
+  lcd.begin(16, 2);
+
+  // Création du caractère personnalisé en position 0
+  lcd.createChar(0, smiley);
+
+  // Affichage
+  lcd.setCursor(0, 0);
+  lcd.print("Hello :)");
+
+  lcd.setCursor(0, 1);
+  lcd.write(byte(0)); // Écrit le smiley
+}
+
+void loop() {
+  // Rien ici
+}

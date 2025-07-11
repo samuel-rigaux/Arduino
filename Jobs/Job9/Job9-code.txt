@@ -1,0 +1,86 @@
+const int ledPin = 9;
+const int buttonPin = 2;
+
+int buttonState;
+int lastButtonState = HIGH;
+
+unsigned long lastDebounceTime = 0;
+unsigned long debounceDelay = 50;
+
+unsigned long clickTimer = 0;
+int clickCount = 0;
+bool ledOn = false;
+bool ledBlink = false;
+
+unsigned long blinkTimer = 0;
+int blinkInterval = 500;
+
+unsigned long buttonPressStart = 0;
+bool longPressDetected = false;
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  pinMode(buttonPin, INPUT_PULLUP); // bouton actif LOW
+}
+
+void loop() {
+  int reading = digitalRead(buttonPin);
+
+  if (reading != lastButtonState) {
+    lastDebounceTime = millis();
+  }
+
+  if ((millis() - lastDebounceTime) > debounceDelay) {
+    // Appui détecté
+    if (reading == LOW && lastButtonState == HIGH) {
+      buttonPressStart = millis();
+      longPressDetected = false;
+    }
+
+    // Relâchement
+    if (reading == HIGH && lastButtonState == LOW) {
+      unsigned long pressDuration = millis() - buttonPressStart;
+
+      if (pressDuration > 1000) { // appui long
+        ledOn = false;
+        ledBlink = false;
+        clickCount = 0;
+        longPressDetected = true;
+      } else {
+        clickCount++;
+        clickTimer = millis();
+      }
+    }
+  }
+
+  // Gestion des clics multiples
+  if (clickCount > 0 && (millis() - clickTimer > 400) && !longPressDetected) {
+    if (clickCount == 1) {
+      // Rien de spécial, juste LED allumée pendant appui (déjà géré)
+    } else if (clickCount == 2) {
+      ledOn = true;
+      ledBlink = false;
+    } else if (clickCount == 3) {
+      ledBlink = true;
+      ledOn = false;
+    }
+    clickCount = 0;
+  }
+
+  // Affichage LED selon l’état
+  if (reading == LOW && clickCount == 0) {
+    // Appui unique : LED allumée temporairement
+    digitalWrite(ledPin, HIGH);
+  } else if (ledOn) {
+    digitalWrite(ledPin, HIGH);
+  } else if (ledBlink) {
+    if (millis() - blinkTimer >= blinkInterval) {
+      blinkTimer = millis();
+      digitalWrite(ledPin, !digitalRead(ledPin));
+    }
+  } else {
+    digitalWrite(ledPin, LOW);
+  }
+
+  lastButtonState = reading;
+}

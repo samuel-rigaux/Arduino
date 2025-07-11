@@ -1,0 +1,47 @@
+const int buttonPin = 2;
+const int ledPin = 9;
+const int fanPin = 10;
+
+bool ledActive = false;
+bool fanActive = false;
+
+unsigned long ledStartTime = 0;
+bool sequenceStarted = false;
+
+void setup() {
+  pinMode(buttonPin, INPUT_PULLUP);  // Bouton actif à LOW
+  pinMode(ledPin, OUTPUT);
+  pinMode(fanPin, OUTPUT);
+}
+
+void loop() {
+  int buttonState = digitalRead(buttonPin);
+
+  // Appui sur le bouton (flanc descendant)
+  static bool lastButtonState = HIGH;
+  if (buttonState == LOW && lastButtonState == HIGH) {
+    if (!sequenceStarted && !fanActive) {
+      // Démarrage de la séquence
+      digitalWrite(ledPin, HIGH);
+      ledActive = true;
+      ledStartTime = millis();
+      sequenceStarted = true;
+    } else if (fanActive) {
+      // Bouton pressé pendant que le ventilateur tourne => l'éteindre
+      digitalWrite(fanPin, LOW);
+      fanActive = false;
+      sequenceStarted = false;
+    }
+    delay(50); // anti-rebond rapide
+  }
+
+  lastButtonState = buttonState;
+
+  // Gestion du temps de la LED
+  if (ledActive && (millis() - ledStartTime >= 15000)) {
+    digitalWrite(ledPin, LOW);       // éteindre LED
+    digitalWrite(fanPin, HIGH);      // allumer ventilateur
+    ledActive = false;
+    fanActive = true;
+  }
+}

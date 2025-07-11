@@ -1,0 +1,17 @@
+// Tableau contenant les broches des 8 LEDs
+int leds[8] = {1, 2, 3, 4, 5, 6, 7, 8};  // change les numéros si besoin
+
+void setup() {
+  // Définir chaque broche comme sortie
+  for (int i = 0; i < 8; i++) {
+    pinMode(leds[i], OUTPUT);
+  }
+}
+
+void loop() {
+  for (int i = 0; i < 8; i++) {
+    digitalWrite(leds[i], HIGH);  // allume la LED
+    delay(200);                   // attend 200 ms
+    digitalWrite(leds[i], LOW);   // éteint la LED
+  }
+}

@@ -1,0 +1,17 @@
+const int potPin = A0;     // Broche analogique pour le potentiomètre
+const int led1 = 9;        // LED 1 sur pin PWM
+const int led2 = 10;       // LED 2 sur pin PWM
+
+void setup() {
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+}
+
+void loop() {
+  int potValue = analogRead(potPin);           // Lecture du potentiomètre (0 à 1023)
+  int led1Brightness = map(potValue, 0, 1023, 0, 255);         // LED 1 augmente
+  int led2Brightness = map(potValue, 0, 1023, 255, 0);         // LED 2 diminue
+
+  analogWrite(led1, led1Brightness);
+  analogWrite(led2, led2Brightness);
+}

@@ -1,0 +1,13 @@
+
+⚡ Câblage :
+Bouton :
+Une patte du bouton → pin 2 Arduino
+
+L'autre patte → GND
+
+Pas besoin de résistance, on utilise INPUT_PULLUP
+
+LED :
+Broche 9 Arduino → Résistance 220Ω → Anode LED
+
+Cathode LED → GND

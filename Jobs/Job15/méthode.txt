@@ -1,0 +1,16 @@
+⚡ Câblage :
+🌀 Potentiomètre :
+Patte 1 → 5V
+
+Patte 2 (milieu) → A0
+
+Patte 3 → GND
+
+🔴 LED RGB (cathode commune) :
+Patte la plus longue → GND
+
+R → Résistance 220Ω → pin 9 (PWM)
+
+G → Résistance 220Ω → pin 10 (PWM)
+
+B → Résistance 220Ω → pin 11 (PWM)

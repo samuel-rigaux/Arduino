@@ -1,0 +1,15 @@
+⚡ Câblage :
+🧾 LCD I2C :
+LCD I2C	Arduino UNO
+VCC	5V
+GND	GND
+SDA	A4
+SCL	A5
+
+🔘 Bouton :
+Une patte → Pin 2
+
+Autre patte → GND
+
+Utilise INPUT_PULLUP, donc pas besoin de résistance externe
+

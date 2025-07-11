@@ -1,0 +1,17 @@
+⚡ Câblage :
+🔘 Bouton :
+Une patte → Pin 2 Arduino
+
+Autre patte → GND
+
+Utilisation du INPUT_PULLUP, donc pas besoin de résistance
+
+🔴 LED :
+Pin 9 → Résistance 220 Ω → LED → GND
+
+🌀 Ventilateur (5V) :
+Pin 10 → transistor ou relais → ventilateur
+
+Le GND du ventilateur doit être commun avec Arduino
+⚠️ Si c’est un ventilo 5V faible tu peux le piloter en direct via transistor NPN + diode de roue libre.
+

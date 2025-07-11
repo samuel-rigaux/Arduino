@@ -1,0 +1,39 @@
+const int potPin = A0;
+
+const int redPin = 9;
+const int greenPin = 10;
+const int bluePin = 11;
+
+void setup() {
+  pinMode(redPin, OUTPUT);
+  pinMode(greenPin, OUTPUT);
+  pinMode(bluePin, OUTPUT);
+}
+
+void loop() {
+  int potValue = analogRead(potPin); // 0 à 1023
+
+  // Divise la plage en 3 zones pour gérer R → G → B
+  int zone = potValue / 341; // 1023 / 3 ≈ 341
+  int value = potValue % 341;
+
+  int red = 0, green = 0, blue = 0;
+
+  if (zone == 0) {
+    red = map(341 - value, 0, 341, 0, 255);
+    green = map(value, 0, 341, 0, 255);
+    blue = 0;
+  } else if (zone == 1) {
+    red = 0;
+    green = map(341 - value, 0, 341, 0, 255);
+    blue = map(value, 0, 341, 0, 255);
+  } else {
+    red = map(value, 0, 341, 0, 255);
+    green = 0;
+    blue = map(341 - value, 0, 341, 0, 255);
+  }
+
+  analogWrite(redPin, red);
+  analogWrite(greenPin, green);
+  analogWrite(bluePin, blue);
+}

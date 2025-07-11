@@ -1,0 +1,24 @@
+const int ledPin = 4;  // La LED est connectée à une broche PWM (ex : 9)
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+  // Fade in (augmentation progressive de la luminosité)
+  for (int brightness = 0; brightness <= 255; brightness++) {
+    analogWrite(ledPin, brightness);  // PWM : de 0 (éteint) à 255 (plein)
+    delay(10);  // délai pour rendre la montée visible
+  }
+
+  delay(1000); // pause quand c’est allumé à fond (facultatif)
+
+  // (optionnel) fade out si tu veux aussi une extinction progressive :
+  /*
+  for (int brightness = 255; brightness >= 0; brightness--) {
+    analogWrite(ledPin, brightness);
+    delay(10);
+  }
+  delay(1000);
+  */
+}

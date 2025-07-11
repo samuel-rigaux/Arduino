@@ -1,0 +1,18 @@
+⚡ Câblage :
+🔧 Potentiomètre (3 pattes) :
+🌀 Patte du milieu → A0
+
+⚡ Une extrémité → 5V
+
+🧯 L’autre extrémité → GND
+
+🔴 LED1 (intensité augmente) :
+Broche 9 → Résistance 220Ω → Anode LED1
+
+Cathode LED1 → GND
+
+🔵 LED2 (intensité diminue) :
+Broche 10 → Résistance 220Ω → Anode LED2
+
+Cathode LED2 → GND
+
